@@ -1,0 +1,107 @@
+-- plugins.lua: Neovim plugin manager configuration
+
+require('lazy').setup({
+
+  -- Kanagawa theme
+  'rebelot/kanagawa.nvim',
+
+    {
+    'nvim-telescope/telescope.nvim', -- The Telescope plugin
+    dependencies = { 
+      'nvim-lua/plenary.nvim',  -- Dependency for Telescope to work
+    },
+    config = function()
+      require('telescope').setup{
+        defaults = {
+          -- Setup your default settings for Telescope here, if needed
+          -- For example:
+          prompt_prefix = "🔭 ",  -- Change the prompt prefix if you like
+          mappings = {
+            i = { -- Insert mode keymaps
+              ["<C-j>"] = "move_selection_next",  -- Move selection down
+              ["<C-k>"] = "move_selection_previous",  -- Move selection up
+            },
+            n = { -- Normal mode keymaps
+              ["<C-j>"] = "move_selection_next",  -- Move selection down
+              ["<C-k>"] = "move_selection_previous",  -- Move selection up
+            },
+          },
+        }
+      }
+    end
+  },
+
+  -- Git integration with Gitsigns
+  'lewis6991/gitsigns.nvim',
+
+  -- Fugitive for Git integration
+  'tpope/vim-fugitive',
+
+  -- Mason for automatic installation and management of LSPs
+  'williamboman/mason.nvim',
+
+  -- mason-lspconfig for automatic LSP server setup
+  'williamboman/mason-lspconfig.nvim',
+
+  -- LSP configuration with nvim-lspconfig
+  'neovim/nvim-lspconfig',
+
+  -- Autocompletion with nvim-cmp
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'saadparwaiz1/cmp_luasnip',
+
+  -- Snippets support with LuaSnip
+  'L3MON4D3/LuaSnip',
+
+  -- Autopairs for automatic pairing of brackets, parentheses, etc.
+  'windwp/nvim-autopairs',
+
+  -- Treesitter for syntax highlighting and more
+  'nvim-treesitter/nvim-treesitter',
+
+  -- Status line with Lualine
+  'nvim-lualine/lualine.nvim',
+
+  -- Tagbar for file outline navigation
+  'preservim/tagbar',
+
+  {
+  "jackMort/ChatGPT.nvim",
+  event = "VeryLazy",
+  config = function()
+    require("chatgpt").setup({
+      -- this config assumes you have OPENAI_API_KEY environment variable set
+        api_key_cmd = "echo '<chat_gpt_api_key_here>'"
+      openai_params = {
+        -- NOTE: model can be a function returning the model name
+        -- this is useful if you want to change the model on the fly
+        -- using commands
+        -- Example:
+        -- model = function()
+        --     if some_condition() then
+        --         return "gpt-4-1106-preview"
+        --     else
+        --         return "gpt-3.5-turbo"
+        --     end
+        -- end,
+        model = "gpt-4-1106-preview",
+        frequency_penalty = 0,
+        presence_penalty = 0,
+        max_tokens = 4095,
+        temperature = 0.2,
+        top_p = 0.1,
+        n = 1,
+      }
+    })
+  end,
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim", -- optional
+    "nvim-telescope/telescope.nvim"
+  }
+},
+})
