@@ -74,7 +74,7 @@ require('lazy').setup({
   config = function()
     require("chatgpt").setup({
       -- this config assumes you have OPENAI_API_KEY environment variable set
-        api_key_cmd = "echo '<chat_gpt_api_key_here>'"
+        api_key_cmd = "echo '<chat_gpt_api_key_here>'",
       openai_params = {
         -- NOTE: model can be a function returning the model name
         -- this is useful if you want to change the model on the fly
